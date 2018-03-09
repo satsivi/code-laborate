@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './CSS/index.css';
+import './CSS/atom-one-dark.css'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

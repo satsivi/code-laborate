@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fire from './fire';
+import Highlight from 'react-highlight.js';
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class App extends Component {
         <input type="submit" />
         <ul>
           { /* Render the list of messages */
-            this.state.messages.map(message => <li key={message.id}>{message.text}</li>)
+            this.state.messages.map(message => <li key={message.id}><Highlight language='javascript'><pre><code>{message.text}</code></pre></Highlight></li>)
           }
         </ul>
       </form>

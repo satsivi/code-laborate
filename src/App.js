@@ -1,43 +1,34 @@
-import React, { Component } from 'react';
-import fire from './fire';
-import Highlight from 'react-highlight.js';
+import React, {Component} from 'react';
+import Editor from './Components/Editor'
+import {Menu} from 'element-react'
+import 'element-theme-default'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { messages: [] }; // <- set up react state
+// import * as elem from 'element-react'
+// console.log(elem)
+
+export default class App extends Component{
+  constructor(){
+    super()
+    this.onChange = this.onChange.bind(this)
   }
 
-  componentDidMount() {
-    /* Create reference to messages in Firebase Database */
-    let messagesRef = fire.database().ref('messages').orderByKey().limitToLast(100);
-    messagesRef.on('child_added', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      let message = { text: snapshot.val(), id: snapshot.key };
-      this.setState({ messages: [message].concat(this.state.messages) });
-    })
+  onChange(newValue) {
+    console.log('change', newValue);
   }
 
-  addMessage(e) {
-    e.preventDefault(); // <- prevent form submit from reloading the page
-    /* Send the message to Firebase */
-    fire.database().ref('messages').push(this.inputEl.value);
-    this.inputEl.value = ''; // <- clear the input
-  }
+// Render editor
   render() {
-    console.log(this.state)
     return (
-      <form onSubmit={this.addMessage.bind(this)}>
-        <input type="text" ref={el => this.inputEl = el} />
-        <input type="submit" />
-        <ul>
-          { /* Render the list of messages */
-            this.state.messages.map(message => <li key={message.id}><Highlight language='javascript'><pre><code>{message.text}</code></pre></Highlight></li>)
-          }
-        </ul>
-      </form>
-    );
+      <div>
+        <Menu defaultActive="1" className="el-menu" mode="horizontal">
+          <Menu.Item index="1">Home</Menu.Item>
+          <Menu.Item index="2">Random</Menu.Item>
+          <Menu.Item index="3">New</Menu.Item>
+      </Menu>
+      <Editor/>
+      </div>
+    )
   }
 }
 
-export default App;
+

@@ -6,7 +6,7 @@ const GET_SNIPPET = 'GET_SNIPPET'
 
 export const fetchSnippet = snippetId => {
   return function thunk(dispatch) {
-    
+    let messagesRef = fire.database().ref('messages')
   }
 }
 

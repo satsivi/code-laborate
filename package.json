@@ -8,13 +8,17 @@
     "element-react": "^1.4.8",
     "element-theme-default": "^1.4.13",
     "firebase": "^4.11.0",
+    "history": "^4.7.2",
     "react": "^16.2.0",
     "react-ace": "^5.9.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6"
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

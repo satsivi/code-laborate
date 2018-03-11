@@ -22,7 +22,6 @@ class Editor extends Component {
     var ref = fire.database().ref("/snippet/-K2ib4H77rj0LYewF7dP")
     ref.update({text: newValue })
 
-    // ref.on('child_changed', (snap) => console.log('updated text is', snap.val()));
   }
 
   componentDidMount() {

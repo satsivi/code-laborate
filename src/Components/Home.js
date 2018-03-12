@@ -3,6 +3,7 @@ import { Button } from 'element-react'
 import 'element-theme-default'
 import fire from '../fire'
 import { withRouter } from "react-router-dom"
+import firebase from 'firebase'
 
 class Home extends Component {
   constructor(){

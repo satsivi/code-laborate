@@ -5,6 +5,8 @@ import { default as Home } from './Components/Home'
 import { default as Login } from './Components/Login'
 import { default as Logout } from './Components/Logout'
 import { default as ErrorPage } from './Components/ErrorPage'
+import { default as SignedIn} from './Components/SignedIn';
+
 class Routes extends Component {
 
   render() {
@@ -14,6 +16,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/notfound" component={ErrorPage} />
+        <Route exact path="/signedin" component={SignedIn} />
         <Route path="/:id" component = {Editor} />
       </Switch>
     )

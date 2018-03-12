@@ -81,7 +81,7 @@ class Chat extends Component {
           onChange={this.handleChange}
           className="messageBox"
           />
-          <Button type="info" nativeType="submit">Submit</Button>
+          <Button type="info" nativeType="submit" className="messageSubmit">Submit</Button>
         </form>
       </div>
     )

@@ -27,15 +27,25 @@ body {
   overflow-y: auto;
   border: 1px solid #778899;
   max-width: 100%;
-  height: 500px;
+  height: calc( 100vh - 140px );
   flex-direction: column-reverse;
 }
 
 .messageBox {
+  display: flex;
   height: 50px;
   width: calc(100% - 80px);
+  flex-basis: 80%;
+}
+.messageSubmit {
+  display: flex;
+  width: 80px;
 }
 
 .flexContainer {
   display: flex;
+}
+
+.sideContainer {
+  width: 23vw;
 }

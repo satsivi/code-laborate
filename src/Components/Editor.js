@@ -96,7 +96,7 @@ class Editor extends Component {
             <Button size="mini">Copy</Button>
           </CopyToClipboard>
           {
-            loggedIn ? <div className='home'>You must be logged in to edit.</div>:
+            loggedIn ? <div className='home'>You must be logged in to chat.</div>:
             <Chat refId={this.state.refId}/>
           }
         </div>

@@ -32,14 +32,14 @@ class Chat extends Component {
     ref.push().set(messageBody)
 
     this.setState({message: ""})
-    console.log("yes")
+    //console.log("yes")
   }
 
   componentDidMount(){
     // load messages
     let ref = fire.database().ref(`/snippet/${this.props.refId}/messages`)
     ref.on('value', (snap) => {
-      console.log(snap.val())
+      //console.log(snap.val())
 
       if(snap.val()){
         let msgArr = []
@@ -58,7 +58,7 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.state.messages)
+    //console.log(this.state.messages)
     return (
       <div>
         <div className="chatbox">

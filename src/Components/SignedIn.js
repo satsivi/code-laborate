@@ -16,7 +16,7 @@ class SignedIn extends Component {
   }
 
   render() {
-    console.log(firebase.auth().currentUser)
+    //console.log(firebase.auth().currentUser)
     return (
       <h1 className="home">{firebase.auth().currentUser ? <span>Welcome  {firebase.auth().currentUser.displayName} You've been signed in.</span> : <Link to="/login"><Button icon="caret-right">Log In</Button></Link> }</h1>
     );

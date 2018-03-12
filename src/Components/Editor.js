@@ -54,7 +54,7 @@ class Editor extends Component {
   }
 
   render(){
-    console.log(this.state.refId)
+    //console.log(this.state.refId)
     let loggedIn= !firebase.auth().currentUser
     return (
       <div className='editorContainer'>

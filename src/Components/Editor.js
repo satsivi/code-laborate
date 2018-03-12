@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import 'brace/mode/javascript'
 import 'brace/theme/tomorrow'
 import fire from '../fire'
 
 class Editor extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      text: ''
+      text: '',
+      refId: this.props.match.params.id
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -19,23 +21,26 @@ class Editor extends Component {
     this.setState({
       text: newValue
     })
-    var ref = fire.database().ref("/snippet/-K2ib4H77rj0LYewF7dP")
+    var ref = fire.database().ref(`/snippet/${this.state.refId}`)
     ref.update({text: newValue })
-
+    // test snippet:-K2ib4H77rj0LYewF7dP
   }
 
   componentDidMount() {
-    var ref = fire.database().ref("/snippet/-K2ib4H77rj0LYewF7dP/text")
+    var ref = fire.database().ref(`/snippet/${this.state.refId}/text`)
 
     ref.on('value', (snap) => {
-      this.setState({text: snap.val()})
+      if(snap.val() === null){
+        this.props.history.push("/")
+      }else{
+        this.setState({ text: snap.val() || '' })
+      }
     })
 
-    //ref.once('value', snap => this.setState({text: snap.val()}))
   }
 
   render(){
-    console.log(this.state.text)
+    console.log(this.state.refId)
     return (
       <AceEditor
         mode="javascript"
@@ -54,20 +59,4 @@ class Editor extends Component {
   }
 }
 
-// const mapState = state => {
-//   return {
-//     snippet: state.snippet
-//   }
-// }
-
-// const mapDispatch = (dispatch, ownProps) => {
-//   return {
-//     getSnippet() {
-//       dispatch()
-//     }
-//   }
-// }
-
-// export default connect(mapState, mapDispatch)(Editor)
-
-export default Editor
+export default withRouter(Editor)

@@ -5,6 +5,14 @@ import 'element-theme-default'
 import firebase from 'firebase'
 
 export default class Navbar extends Component {
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(
+      (user) => {
+        this.forceUpdate();
+      }
+    );
+  }
+  
   render(){
     return (
       <Menu defaultActive="1" className="el-menu" mode="horizontal">

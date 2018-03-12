@@ -43,19 +43,17 @@ class Editor extends Component {
         this.setState({ text: snap.val() || '' })
       }
     })
+
+    firebase.auth().onAuthStateChanged(
+      (user) => {
+        this.setState({dialogVisible: !firebase.auth().currentUser })
+        this.forceUpdate();
+      }
+    );
+
   }
 
-  // notification(){
-  //   Notification({
-  //     title: 'Please Log In',
-  //     message: 'Log in to chat and edit.',
-  //     type: 'warning'
-  //   })
-  // }
-  // { !loggedIn ? <Notification title="Please Log In" message="Log in to chat and edit." type="warning" /> : <span /> }
-
   render(){
-    console.log(Notification)
     console.log(this.state.refId)
     let loggedIn= !firebase.auth().currentUser
     return (
@@ -99,7 +97,7 @@ class Editor extends Component {
           </CopyToClipboard>
           {
             loggedIn ? <div className='home'>You must be logged in to edit.</div>:
-            <Chat />
+            <Chat refId={this.state.refId}/>
           }
         </div>
     </div>

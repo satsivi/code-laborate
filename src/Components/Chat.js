@@ -3,23 +3,86 @@ import { Button } from 'element-react'
 import 'element-theme-default'
 import fire from '../fire'
 import firebase from 'firebase'
+import * as generate from 'string-to-color'
 
 class Chat extends Component {
   constructor(){
     super()
     this.state = {
-      messages:[]
+      messages: [],
+      message: "",
+      name: firebase.auth().currentUser.displayName
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(event){
+    this.setState({message: event.target.value})
+  }
+
+  handleSubmit(event){
+    event.preventDefault()
+    let messageBody = {
+      name: this.state.name,
+      message: this.state.message
+    }
+
+    let ref = fire.database().ref(`/snippet/${this.props.refId}/messages`)
+    ref.push().set(messageBody)
+
+    this.setState({message: ""})
+    console.log("yes")
+  }
+
+  componentDidMount(){
+    // load messages
+    let ref = fire.database().ref(`/snippet/${this.props.refId}/messages`)
+    ref.on('value', (snap) => {
+      console.log(snap.val())
+
+      if(snap.val()){
+        let msgArr = []
+        for(let key in snap.val()){
+          msgArr.push({
+            id: key,
+            name: snap.val()[key].name,
+            message: snap.val()[key].message,
+            color: generate(snap.val()[key].name)
+          })
+        }
+        this.setState({ messages: msgArr})
+      }
+    })
+
   }
 
   render() {
+    console.log(this.state.messages)
     return (
       <div>
-        {/*Jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed. Behind the couch. Meow loudly just to annoy owners stare at wall turn and meow stare at wall some more meow again continue staring howl uncontrollably for no reason. Annoy kitten brother with poking jump around on couch, meow constantly until given food, . Scream at teh bath leave fur on owners clothes if human is on laptop sit on the keyboard and intently stare at the same spot, so always hungry and eat the fat cats food. Stand in front of the computer screen. Sit on human intently stare at the same spot annoy kitten brother with poking and see owner, run in terror hide from vacuum cleaner or hide at bottom of staircase to trip human. Annoy the old grumpy cat, start a fight and then retreat to wash when i lose stare out the window hunt by meowing loudly at 5am next to human slave food dispenser yet refuse to come home when humans are going to bed; stay out all night then yowl like i am dying at 4am yet scratch at the door then walk away for asdflkjaertvlkjasntvkjn (sits on keyboard).*/}
         <div className="chatbox">
-
+        {
+          this.state.messages.length?<div>
+          {this.state.messages.map((message) =>{
+            let styles = {
+              color: message.color,
+              fontWeight: 'bold'
+            }
+            //style={{marginRight: spacing + 'em'}}
+            return <div key={message.id}><span style={styles}>{message.name}</span>: {message.message}</div>
+          })}
+          </div> : <div>There are no messages.</div>
+        }
         </div>
-        <textarea/>
+        <form onSubmit={this.handleSubmit} className="flexContainer">
+          <textarea
+          value={this.state.message}
+          onChange={this.handleChange}
+          className="messageBox"
+          />
+          <Button type="info" nativeType="submit">Submit</Button>
+        </form>
       </div>
     )
   }

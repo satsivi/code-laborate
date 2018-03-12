@@ -4,9 +4,15 @@ body {
   font-family: sans-serif;
 }
 
-.codeEditor{
+.codeEditor {
   max-height: 500px;
   max-width: 500px;
   border-width: 1px;
   border-color: black;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

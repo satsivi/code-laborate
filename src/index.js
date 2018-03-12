@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './CSS/index.css';
-import './CSS/atom-one-dark.css'
 
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'

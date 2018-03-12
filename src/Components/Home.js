@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'element-react'
 import 'element-theme-default'
 import fire from '../fire'
-import { withRouter } from "react-router-dom";
-import history from 'history'
-
+import { withRouter } from "react-router-dom"
 
 class Home extends Component {
   constructor(){
@@ -17,7 +15,7 @@ class Home extends Component {
     let key = ref.push().key
 
     fire.database().ref(`/snippet/${key}`).set({ text: '// Write some code... Together!' })
-    
+
     this.props.history.push(`/${key}`)
   }
 

@@ -1,18 +1,11 @@
-import React, {Component} from 'react';
-import Editor from './Components/Editor'
+import React, {Component} from 'react'
 import Navbar from './Components/Navbar'
 import Routes from './routes'
-
-// import * as elem from 'element-react'
-// console.log(elem)
+import firebase from 'firebase'
 
 export default class App extends Component{
-  constructor(){
-    super()
-  }
-
-// Render editor
   render() {
+    console.log('User ', firebase.auth().currentUser)
     return (
       <div>
         <Navbar />
